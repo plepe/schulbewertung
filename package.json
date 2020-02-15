@@ -9,6 +9,6 @@
   "scripts": {
     "build": "browserify src/index.js -o dist/app.js",
     "watch": "watchify --debug src/index.js -o dist/app.js -v",
-    "prepare": "mkdir dist && npm run build"
+    "prepare": "mkdir -p dist && npm run build"
   }
 }
