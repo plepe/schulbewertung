@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "csvtojson": "^2.0.10"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.0",
+    "watchify": "^3.11.1"
+  },
+  "scripts": {
+    "build": "browserify src/index.js -o dist/app.js",
+    "watch": "watchify --debug src/index.js -o dist/app.js -v",
+    "prepare": "mkdir dist && npm run build"
+  }
+}
