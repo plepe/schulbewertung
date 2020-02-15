@@ -1,0 +1,69 @@
+{
+    "Vorplatz": {
+        "type": "select",
+        "name": "Vorplatz",
+        "values": {
+             "1": "1 - Autofrei / Fußgängerzone",
+             "2": "2 - vorgezogener Gehsteig",
+             "3": "3",
+             "4": "4 - um Parkplatz verbreiterter Gehsteig",
+             "5": "5 - normaler Gehsteig (< 3m Breite)"
+        }
+    },
+    "Schulstraße": {
+        "type": "select",
+        "name": "Schulstraße",
+        "values": {
+             "1": "1 - autofreier Bereich",
+             "2": "2 - Schulstraße",
+             "3": "3 - Wohnstraße",
+             "4": "4 - Nebenstraße",
+             "5": "5 - Kfz-belastete Straße"
+        }
+    },
+    "Rad-Erreichbar": {
+        "type": "select",
+        "name": "Liegt die Schule an einer Radinfrastruktur (Radweg, Radroute, Wohnstraße)",
+        "values": {
+             "1": "1 - Ja, hier würde ich mit kleinen Kindern gemeinsam radeln",
+             "2": "2",
+             "3": "3 - Ja, aber verbesserungswürdig (Kfz Konflikte)",
+             "4": "4",
+             "5": "5 - Nein"
+        }
+    },
+    "HRVN Verbunden": {
+        "type": "select",
+        "name": "Ist die Schule über Radinfrastruktur an das Hauptradverkehrsnetz angebunden",
+        "values": {
+             "1": "1 - liegt direkt an Hauptradverkehrsnetz",
+             "2": "2 - über angenehme Radinfrastruktur gut erreichbar",
+             "3": "3",
+             "4": "4",
+             "5": "5 - weit und breit kein Hauptradverkehrsnetz"
+        }
+    },
+    "Radabstell": {
+        "type": "select",
+        "name": "Gibt es Radabstellanlagen",
+        "values": {
+             "1": "1 - Ja, viele Radabstellanlagen im Schulumfeld",
+             "2": "2",
+             "3": "3 - Wenige Bügel",
+             "4": "4 ",
+             "5": "5 - Keinerlei Radabstellanlagen"
+        }
+    },
+    "Anz gefährliche Kreuzungen": {
+        "type": "integer",
+        "name": "Anzahl gefährliche Kreuzungen"
+    },
+    "Anz erh Vorsicht": {
+        "type": "integer",
+        "name": "Anzahl erhöhte Vorsicht"
+    },
+    "Kommentare": {
+        "type": "textarea",
+        "name": "Kommentare"
+    }
+}

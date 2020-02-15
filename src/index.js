@@ -1,8 +1,12 @@
 const csvtojson = require('csvtojson')
+const ModulekitForm = require('modulekit-form')
 
 const httpGet = require('./httpGet')
+const formDef = require('./form.json')
 
 let schulen
+
+global.lang_str = {}
 
 window.onload = () => {
   httpGet('data/schulen.csv', {}, (err, result) => {
@@ -30,5 +34,11 @@ window.onload = () => {
 function open () {
   let option = schulen.selectedOptions[0]
   let data = option.data
-  console.log(data)
+
+  let dom = document.getElementById('data')
+  dom.innerHTML = ''
+
+  let form = new ModulekitForm('data', formDef)
+  form.show(dom)
+  form.set_data(data)
 }
