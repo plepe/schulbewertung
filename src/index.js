@@ -1,10 +1,13 @@
 const csvtojson = require('csvtojson')
 const ModulekitForm = require('modulekit-form')
+require('leaflet')
 
 const httpGet = require('./httpGet')
 const formDef = require('./form.json')
 
 let schulen
+let map
+let marker
 
 global.lang_str = {}
 
@@ -29,11 +32,24 @@ window.onload = () => {
     schulen.onchange = open
     global.setTimeout(open, 1)
   })
+
+  map = L.map('map')
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 }
 
 function open () {
   let option = schulen.selectedOptions[0]
   let data = option.data
+
+  map.setView([data.LAT, data.LON], 18)
+  if (marker) {
+    marker.setLatLng([data.LAT, data.LON])
+  } else {
+    marker = L.marker([data.LAT, data.LON]).addTo(map)
+  }
 
   let dom = document.getElementById('data')
   dom.innerHTML = ''
