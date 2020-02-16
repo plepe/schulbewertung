@@ -2,6 +2,7 @@
   "dependencies": {
     "csvtojson": "^2.0.10",
     "leaflet": "^1.6.0",
+    "leaflet.wms": "^0.2.0",
     "modulekit-form": "git+https://github.com/plepe/modulekit-form.git#browserify"
   },
   "devDependencies": {

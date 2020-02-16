@@ -8,6 +8,7 @@ const formDef = require('./form.json')
 let schulen
 let map
 let marker
+let layers = {}
 
 global.lang_str = {}
 
@@ -35,9 +36,32 @@ window.onload = () => {
 
   map = L.map('map')
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  layers['Basemap.at'] = L.tileLayer('https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png', {
+    subdomains:['maps', 'maps1', 'maps2', 'maps3', 'maps4'], maxZoom:25, maxNativeZoom:19,
+    bounds: L.latLngBounds(L.latLng(49.3,8.78),L.latLng(46.25,18.029)),
+    attribution:'<a target="_blank" href="https://www.basemap.at/">basemap.at</a>',
+    errorTileUrl:'/Karten/transparent.gif'
+  })
+
+  layers['Basemap.at Orthophoto'] = L.tileLayer('https://{s}.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg',{
+    subdomains:['maps', 'maps1', 'maps2', 'maps3', 'maps4'], maxZoom:25, maxNativeZoom:19,
+    attribution:'<a target="_blank" href="https://www.basemap.at/">basemap.at</a>',
+    errorTileUrl:'/Karten/transparent.gif'
+  })
+
+  let wmswien = L.WMS.source("https://data.wien.gv.at/daten/wms", {
+    format: "image/png",
+    transparent: "TRUE",
+    tiled: false,
+    attribution: 'Stadt Wien – <a target="_blank" href="https://data.wien.gv.at">data.wien.gv.at</a>'
+  })
+  layers['Radnetz Wien'] = wmswien.getLayer('RADWEGEOGD')
+
+  layers['OpenStreetMap Mapnik'] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+  })
+
+  L.control.layers(layers).addTo(map)
 }
 
 function open () {
