@@ -41,4 +41,33 @@ function open () {
   let form = new ModulekitForm('data', formDef)
   form.show(dom)
   form.set_data(data)
+
+  let input = document.createElement('input')
+  input.type = 'submit'
+  input.value = 'Speichern'
+  dom.appendChild(input)
+
+  dom.onsubmit = () => {
+    let changes = form.get_data()
+
+    for (let k in changes) {
+      data[k] = changes[k]
+    }
+
+    let req = new XMLHttpRequest()
+    req.onreadystatechange = () => {
+      if (req.readyState === 4) {
+        if (req.status === 200) {
+          alert('Gespeichert.')
+        } else {
+          alert(req.responseText)
+        }
+      }
+    }
+
+    req.open('POST', 'save.php?id=' + data.FID, true)
+    req.send(JSON.stringify(changes))
+
+    return false
+  }
 }
