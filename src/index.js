@@ -10,6 +10,7 @@ let schulen
 let map
 let marker
 let layers = {}
+let overlays = {}
 
 global.lang_str = {}
 
@@ -54,16 +55,19 @@ window.onload = () => {
     format: "image/png",
     transparent: "TRUE",
     tiled: false,
+    maxZoom: 25,
     attribution: 'Stadt Wien – <a target="_blank" href="https://data.wien.gv.at">data.wien.gv.at</a>'
   })
-  layers['Radnetz Wien'] = wmswien.getLayer('RADWEGEOGD')
+  overlays['Radnetz Wien'] = wmswien.getLayer('RADWEGEOGD')
 
   layers['OpenStreetMap Mapnik'] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom:25, maxNativeZoom:19,
   })
 
-  L.control.layers(layers).addTo(map)
-
+  L.control.layers(layers, overlays).addTo(map)
+  layers['Basemap.at'].addTo(map)
+  overlays['Radnetz Wien'].addTo(map)
 }
 
 function open () {
