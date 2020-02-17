@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "copy-to-clipboard": "^3.2.1",
     "csvtojson": "^2.0.10",
     "leaflet": "^1.6.0",
     "leaflet.wms": "^0.2.0",

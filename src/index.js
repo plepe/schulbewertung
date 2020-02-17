@@ -1,5 +1,6 @@
 const csvtojson = require('csvtojson')
 const ModulekitForm = require('modulekit-form')
+const copy = require('copy-to-clipboard')
 require('leaflet')
 
 const httpGet = require('./httpGet')
@@ -62,6 +63,7 @@ window.onload = () => {
   })
 
   L.control.layers(layers).addTo(map)
+
 }
 
 function open () {
@@ -84,7 +86,7 @@ function open () {
 
   let input = document.createElement('input')
   input.type = 'submit'
-  input.value = 'Speichern'
+  input.value = 'Daten in Zwischenablage kopieren (Ctrl-V zum Einfügen in Google Docs)'
   dom.appendChild(input)
 
   dom.onsubmit = () => {
@@ -93,6 +95,13 @@ function open () {
     for (let k in changes) {
       data[k] = changes[k]
     }
+
+    let str = '<table><tr>'
+    for (let k in formDef) {
+      str += '<td>' + (data[k] || '') + '</td>'
+    }
+    str += '</tr></table>'
+    copy(str, { format: 'text/html' })
 
     let req = new XMLHttpRequest()
     req.onreadystatechange = () => {
