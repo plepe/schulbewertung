@@ -5,7 +5,8 @@ const hash = require('sheet-router/hash')
 require('leaflet')
 
 const httpGet = require('./httpGet')
-const formDef = require('./form.json')
+const volkschuleFormDef = require('./volksschule.json')
+const andereSchuleFormDef = require('./andereschule.json')
 
 let schulen
 let map
@@ -117,7 +118,13 @@ function open () {
 
   location.hash = '#' + option.value
 
-  let form = new ModulekitForm('data', formDef)
+  let formDef
+  if (data.ART_TXT.match(/^Volksschule/)) {
+    formDef = volkschuleFormDef
+  } else {
+    form = andereSchuleFormDef
+  }
+  form = new ModulekitForm('data', formDef)
   form.show(dom)
   form.set_data(data)
 
