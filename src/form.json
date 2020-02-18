@@ -56,11 +56,13 @@
     },
     "Anz gefährliche Kreuzungen": {
         "type": "integer",
-        "name": "Anzahl gefährliche Kreuzungen"
+        "name": "Anzahl gefährliche Kreuzungen",
+        "desc": "Siehe <a target='_blank' href='https://www.auva.at/cdscontent/?contentid=10007.672759'>AUVA Schulwegpläne</a>"
     },
     "Anz erh Vorsicht": {
         "type": "integer",
-        "name": "Anzahl erhöhte Vorsicht"
+        "name": "Anzahl erhöhte Vorsicht",
+        "desc": "Siehe <a target='_blank' href='https://www.auva.at/cdscontent/?contentid=10007.672759'>AUVA Schulwegpläne</a>"
     },
     "Kommentare": {
         "type": "textarea",
