@@ -6,6 +6,8 @@
   bottom: 0;
   top: 0;
   padding: 0.5em;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 #map {
   position: absolute;
@@ -15,4 +17,9 @@
   left: 300px;
   border-left: 1px solid black;
   top: 0;
+}
+select,
+input[type=submit] {
+  width: 100%;
+  white-space: normal;
 }
