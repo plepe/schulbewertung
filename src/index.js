@@ -89,6 +89,11 @@ window.onload = () => {
   layers['Basemap.at'].addTo(map)
   overlays['Radnetz Wien'].addTo(map)
   overlays['Fahrradabstellanlagen'].addTo(map)
+
+  map.on('move', (e) => {
+    let center = map.getCenter()
+    document.getElementById('moremaps').innerHTML = "<a target='moremaps' href='https://fahrrad.lima-city.de/Karten/#" + map.getZoom() + "/" + center.lat.toFixed(5) + "/" + center.lng.toFixed(5) + "/basemaphidpi'>Mehr Karten</a>"
+  })
 }
 
 function open () {
