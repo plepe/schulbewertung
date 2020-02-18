@@ -63,6 +63,18 @@ window.onload = () => {
     errorTileUrl:'/Karten/transparent.gif'
   })
 
+  layers['Hauptradverkehrsnetz 2019'] = L.tileLayer('https://fahrrad.lima-city.de/Karten/HRVN2019/Z{z}/{y}/{x}.png', {
+    minNativeZoom:10, maxZoom:25, maxNativeZoom:16,
+    bounds: L.latLngBounds(L.latLng(48.326,16.154),L.latLng(48.1134,16.726)),
+    attribution:'Stadt Wien – <a target="_blank" href="https://data.wien.gv.at">data.wien.gv.at</a>',
+    errorTileUrl:'https://fahrrad.lima-city.de/Karten/transparent.gif'
+  })
+
+  layers['OpenStreetMap Mapnik'] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom:25, maxNativeZoom:19,
+  })
+
   let wmswien = L.WMS.source("https://data.wien.gv.at/daten/wms", {
     format: "image/png",
     transparent: "TRUE",
@@ -71,15 +83,12 @@ window.onload = () => {
     attribution: 'Stadt Wien – <a target="_blank" href="https://data.wien.gv.at">data.wien.gv.at</a>'
   })
   overlays['Radnetz Wien'] = wmswien.getLayer('RADWEGEOGD')
-
-  layers['OpenStreetMap Mapnik'] = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom:25, maxNativeZoom:19,
-  })
+  overlays['Fahrradabstellanlagen'] = wmswien.getLayer('FAHRRADABSTELLANLAGEOGD,MOTORRADABSTELLPLATZOGD')
 
   L.control.layers(layers, overlays).addTo(map)
   layers['Basemap.at'].addTo(map)
   overlays['Radnetz Wien'].addTo(map)
+  overlays['Fahrradabstellanlagen'].addTo(map)
 }
 
 function open () {
