@@ -1,6 +1,7 @@
 const csvtojson = require('csvtojson')
 const ModulekitForm = require('modulekit-form')
 const copy = require('copy-to-clipboard')
+const hash = require('sheet-router/hash')
 require('leaflet')
 
 const httpGet = require('./httpGet')
@@ -33,7 +34,18 @@ window.onload = () => {
       })
 
     schulen.onchange = open
-    global.setTimeout(open, 1)
+    global.setTimeout(() => {
+      if (location.hash && location.hash.length > 1) {
+        schulen.value = location.hash.substr(1)
+      }
+
+      open()
+    }, 1)
+
+    hash(loc => {
+      schulen.value = loc.substr(1)
+      open()
+    })
   })
 
   map = L.map('map')
@@ -71,6 +83,14 @@ window.onload = () => {
 }
 
 function open () {
+  let dom = document.getElementById('data')
+  dom.innerHTML = ''
+
+  if (!schulen.selectedOptions.length) {
+    dom.innerHTML = 'Schule nicht gefunden'
+    return
+  }
+
   let option = schulen.selectedOptions[0]
   let data = option.data
 
@@ -81,8 +101,7 @@ function open () {
     marker = L.marker([data.LAT, data.LON]).addTo(map)
   }
 
-  let dom = document.getElementById('data')
-  dom.innerHTML = ''
+  location.hash = '#' + option.value
 
   let form = new ModulekitForm('data', formDef)
   form.show(dom)
