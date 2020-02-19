@@ -142,7 +142,7 @@ function open () {
 
     let str = '<table><tr>'
     for (let k in formDef) {
-      str += '<td>' + (data[k] || '') + '</td>'
+      str += '<td>' + (data[k] === null ? '' : data[k]) + '</td>'
     }
     str += '</tr></table>'
     copy(str, { format: 'text/html' })
